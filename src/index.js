@@ -3,4 +3,4 @@ const person = {
   birthYear: 1998,
 };
 
-console.log(person);
+console.log(person, 'asdsadassadasdsa');
