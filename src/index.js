@@ -1,3 +1,5 @@
+import './styles/index.scss';
+
 const person = {
   name: 'Lori',
   birthYear: 1998,
