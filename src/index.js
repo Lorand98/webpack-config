@@ -1,8 +1,5 @@
-import './styles/index.scss';
+import { render } from 'react-dom';
 
-const person = {
-  name: 'Lori',
-  birthYear: 1998,
-};
+import App from './components/App';
 
-console.log(person, 'asdsadassadasdsa');
+render(<App />, document.getElementById('root'));
