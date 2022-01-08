@@ -9,14 +9,16 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   mode,
 
-  //   devtool: "source-map",
-  devServer: {
-    static: './dist',
-    hot: true,
+  output: {
+    assetModuleFilename: 'images/[hash][ext][query]',
   },
 
   module: {
     rules: [
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset',
+      },
       {
         test: /\.s?css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
@@ -33,6 +35,12 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx'],
+  },
+
+  //   devtool: "source-map",
+  devServer: {
+    static: './dist',
+    hot: true,
   },
 
   plugins: [new MiniCssExtractPlugin()],
