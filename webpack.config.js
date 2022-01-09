@@ -1,4 +1,7 @@
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 let mode = 'development';
 
@@ -10,6 +13,7 @@ module.exports = {
   mode,
 
   output: {
+    path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'images/[hash][ext][query]',
   },
 
@@ -17,7 +21,7 @@ module.exports = {
     rules: [
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        type: 'asset',
+        type: 'asset/resource',
       },
       {
         test: /\.s?css$/,
@@ -33,6 +37,12 @@ module.exports = {
     ],
   },
 
+  // target: 'node', // use require() & use NodeJs CommonJS style
+  // externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
+  // externalsPresets: {
+  //   node: true, // in order to ignore built-in modules like path, fs, etc.
+  // },
+
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -43,5 +53,11 @@ module.exports = {
     hot: true,
   },
 
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
+  ],
 };
